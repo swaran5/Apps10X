@@ -8,14 +8,15 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.apps10x.R
 import com.example.apps10x.databinding.ActivityMainBinding
 import com.example.apps10x.viewmodel.MainActivityViewModel
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.Dispatchers.Main
 import kotlinx.coroutines.launch
 import kotlin.math.pow
 import kotlin.math.roundToInt
 
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
     lateinit var binding : ActivityMainBinding
