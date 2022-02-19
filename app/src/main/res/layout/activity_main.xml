@@ -1,183 +1,181 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".view.MainActivity"
-    android:background="@color/background"
+    xmlns:bind="http://schemas.android.com/tools"
     >
 
-    <ProgressBar
-        android:id="@+id/progress_bar"
-        android:visibility="gone"
-        android:layout_width="120dp"
-        android:layout_height="120dp"
-        android:drawingCacheQuality="high"
-        android:indeterminateBehavior="repeat"
-        android:indeterminateDrawable="@drawable/loading"
-        android:indeterminateDuration="2000"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <data>
+        <import type="android.view.View"/>
 
-    <LinearLayout
+        <variable
+            name="isLoading"
+            type="Boolean" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        >
+        tools:context=".view.MainActivity"
+        android:background="@color/background">
 
-        <FrameLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="56dp"
-            android:layout_gravity="center_horizontal"
-            >
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="20°"
-                android:textColor="@color/text_color"
-                android:fontFamily="@font/roboto_black"
-                android:textSize="96sp"
-                />
-        </FrameLayout>
-
-        <FrameLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            >
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Bangalore"
-                android:textColor="@color/city_color"
-                android:fontFamily="@font/roboto_thin"
-                android:textSize="36sp"
-                />
-        </FrameLayout>
+        <include
+            layout="@layout/progress_dialog"
+            bind:isLoading="@{isLoading}"
+            />
 
         <LinearLayout
-            android:id="@+id/forecast_layout"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="62dp"
+            android:layout_height="match_parent"
+            android:visibility="@{isLoading ? View.GONE : View.VISIBLE}"
             android:orientation="vertical">
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="80dp"
-                android:orientation="horizontal"
-                android:padding="16dp"
-                >
+            <FrameLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="56dp"
+                android:layout_gravity="center_horizontal">
+
+                <TextView
+                    android:id="@+id/temperature"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="20°"
+                    android:textColor="@color/text_color"
+                    android:fontFamily="@font/roboto_black"
+                    android:textSize="96sp" />
+            </FrameLayout>
+
+            <FrameLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal">
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Day 1"
-                    android:textColor="@color/text_color"
-                    android:textSize="16sp"
-                    android:layout_weight="1"
-                    android:fontFamily="@font/roboto_regular"
-                    android:layout_gravity="center"
-                    />
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="24 C"
-                    android:textColor="@color/text_color"
-                    android:textSize="16sp"
-                    android:fontFamily="@font/roboto_regular"
-                    android:layout_gravity="center"
-                    />
-            </LinearLayout>
+                    android:text="Bangalore"
+                    android:textColor="@color/city_color"
+                    android:fontFamily="@font/roboto_thin"
+                    android:textSize="36sp" />
+            </FrameLayout>
 
             <LinearLayout
+                android:id="@+id/forecast_layout"
                 android:layout_width="match_parent"
-                android:layout_height="80dp"
-                android:orientation="horizontal"
-                android:padding="16dp"
-                >
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Day 2"
-                    android:textColor="@color/text_color"
-                    android:textSize="16sp"
-                    android:layout_weight="1"
-                    android:fontFamily="@font/roboto_regular"
-                    android:layout_gravity="center"
-                    />
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="24 C"
-                    android:textColor="@color/text_color"
-                    android:textSize="16sp"
-                    android:fontFamily="@font/roboto_regular"
-                    android:layout_gravity="center"
-                    />
+                android:layout_height="wrap_content"
+                android:layout_marginTop="62dp"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="80dp"
+                    android:orientation="horizontal"
+                    android:padding="16dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Day 1"
+                        android:textColor="@color/text_color"
+                        android:textSize="16sp"
+                        android:layout_weight="1"
+                        android:fontFamily="@font/roboto_regular"
+                        android:layout_gravity="center" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="24 C"
+                        android:textColor="@color/text_color"
+                        android:textSize="16sp"
+                        android:fontFamily="@font/roboto_regular"
+                        android:layout_gravity="center" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="80dp"
+                    android:orientation="horizontal"
+                    android:padding="16dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Day 2"
+                        android:textColor="@color/text_color"
+                        android:textSize="16sp"
+                        android:layout_weight="1"
+                        android:fontFamily="@font/roboto_regular"
+                        android:layout_gravity="center" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="24 C"
+                        android:textColor="@color/text_color"
+                        android:textSize="16sp"
+                        android:fontFamily="@font/roboto_regular"
+                        android:layout_gravity="center" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="80dp"
+                    android:orientation="horizontal"
+                    android:padding="16dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Day 3"
+                        android:textColor="@color/text_color"
+                        android:textSize="16sp"
+                        android:layout_weight="1"
+                        android:fontFamily="@font/roboto_regular"
+                        android:layout_gravity="center" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="24 C"
+                        android:textColor="@color/text_color"
+                        android:textSize="16sp"
+                        android:fontFamily="@font/roboto_regular"
+                        android:layout_gravity="center" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="80dp"
+                    android:orientation="horizontal"
+                    android:padding="16dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Day 4"
+                        android:textColor="@color/text_color"
+                        android:textSize="16sp"
+                        android:layout_weight="1"
+                        android:fontFamily="@font/roboto_regular"
+                        android:layout_gravity="center" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="24 C"
+                        android:textColor="@color/text_color"
+                        android:textSize="16sp"
+                        android:fontFamily="@font/roboto_regular"
+                        android:layout_gravity="center" />
+                </LinearLayout>
+
+
             </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="80dp"
-                android:orientation="horizontal"
-                android:padding="16dp"
-                >
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Day 3"
-                    android:textColor="@color/text_color"
-                    android:textSize="16sp"
-                    android:layout_weight="1"
-                    android:fontFamily="@font/roboto_regular"
-                    android:layout_gravity="center"
-                    />
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="24 C"
-                    android:textColor="@color/text_color"
-                    android:textSize="16sp"
-                    android:fontFamily="@font/roboto_regular"
-                    android:layout_gravity="center"
-                    />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="80dp"
-                android:orientation="horizontal"
-                android:padding="16dp"
-                >
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Day 4"
-                    android:textColor="@color/text_color"
-                    android:textSize="16sp"
-                    android:layout_weight="1"
-                    android:fontFamily="@font/roboto_regular"
-                    android:layout_gravity="center"
-                    />
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="24 C"
-                    android:textColor="@color/text_color"
-                    android:textSize="16sp"
-                    android:fontFamily="@font/roboto_regular"
-                    android:layout_gravity="center"
-                    />
-            </LinearLayout>
-
-
 
         </LinearLayout>
 
-    </LinearLayout>
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
