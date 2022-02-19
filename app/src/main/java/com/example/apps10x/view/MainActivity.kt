@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Handler
 import android.view.animation.AnimationUtils
 import androidx.annotation.RequiresApi
 import androidx.databinding.DataBindingUtil
@@ -39,30 +40,56 @@ class MainActivity : AppCompatActivity() {
         viewModel = ViewModelProvider(this).get(MainActivityViewModel::class.java)
 
         binding.isLoading = true
+        binding.isError = false
 
         CoroutineScope(Main).launch {
-
-            viewModel.getWeather().observe(context, {
-
-                animateForecastLayout()
-                binding.temperature.text = kelvinToCelsius(it.main.temp)
-                binding.isLoading = false
-
-            })
-
-            viewModel.getForeCast().observe(context, {
-
-                var currentDay = ""
-                for(i in it.list.indices){
-                    if(currentDay == "" || currentDay != stringToDay(it.list[i].dtTxt)){
-                        currentDay = stringToDay(it.list[i].dtTxt)
-                        days.add(currentDay)
-                        temp.add(kelvinToCelsius(it.list[i].main.temp))
-                    }
-                }
-                setData(days, temp)
-            })
+            loadWeather()
         }
+
+        binding.retry.setOnClickListener {
+            binding.isLoading = true
+            binding.isError = false
+            Handler().postDelayed({
+                loadWeather()
+            }, 1000)
+        }
+    }
+
+    @RequiresApi(Build.VERSION_CODES.O)
+    private fun loadWeather() {
+        viewModel.getWeather().observe(context, {
+
+            if(it != null) {
+                binding.isLoading = false
+                binding.isError = false
+                binding.temperature.text = kelvinToCelsius(it.main.temp)
+            }else{
+                binding.isLoading = false
+                binding.isError = true
+            }
+        })
+
+        viewModel.getForeCast().observe(context, {
+
+            if(it != null){
+            binding.isLoading = false
+                binding.isError = false
+            animateForecastLayout()
+
+            var currentDay = ""
+            for(i in it.list.indices){
+                if(currentDay == "" || currentDay != stringToDay(it.list[i].dtTxt)){
+                    currentDay = stringToDay(it.list[i].dtTxt)
+                    days.add(currentDay)
+                    temp.add(kelvinToCelsius(it.list[i].main.temp))
+                }
+            }
+            setData(days, temp)
+        }else{
+                binding.isLoading = false
+                binding.isError = true
+            }
+        })
     }
 
     private fun setData(days: ArrayList<String>, temp: ArrayList<String>) {

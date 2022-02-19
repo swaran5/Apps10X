@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Apps10X</string>
+    <string name="something_went_wrong">Something went wrong at our end!</string>
+    <string name="retry">Retry</string>
 </resources>
