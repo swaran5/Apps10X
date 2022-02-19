@@ -75,6 +75,7 @@
                     android:padding="16dp">
 
                     <TextView
+                        android:id="@+id/day1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Day 1"
@@ -85,6 +86,7 @@
                         android:layout_gravity="center" />
 
                     <TextView
+                        android:id="@+id/temp_day1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="24 C"
@@ -101,6 +103,7 @@
                     android:padding="16dp">
 
                     <TextView
+                        android:id="@+id/day2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Day 2"
@@ -111,6 +114,7 @@
                         android:layout_gravity="center" />
 
                     <TextView
+                        android:id="@+id/temp_day2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="24 C"
@@ -127,6 +131,7 @@
                     android:padding="16dp">
 
                     <TextView
+                        android:id="@+id/day3"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Day 3"
@@ -137,6 +142,7 @@
                         android:layout_gravity="center" />
 
                     <TextView
+                        android:id="@+id/temp_day3"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="24 C"
@@ -153,6 +159,7 @@
                     android:padding="16dp">
 
                     <TextView
+                        android:id="@+id/day4"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Day 4"
@@ -163,6 +170,7 @@
                         android:layout_gravity="center" />
 
                     <TextView
+                        android:id="@+id/temp_day4"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="24 C"
