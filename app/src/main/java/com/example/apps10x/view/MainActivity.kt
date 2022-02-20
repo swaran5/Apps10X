@@ -49,9 +49,7 @@ class MainActivity : AppCompatActivity() {
         binding.retry.setOnClickListener {
             binding.isLoading = true
             binding.isError = false
-            Handler().postDelayed({
                 loadWeather()
-            }, 1000)
         }
     }
 
